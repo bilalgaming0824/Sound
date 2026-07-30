@@ -1,0 +1,5 @@
+uploads/
+.env
+*.log
+public/audio/
+public/videos/
