@@ -1,8 +1,9 @@
 <?php
 $pageTitle = 'Manage Users';
 $section = 'users';
-require_once __DIR__ . '/includes/header.php';
-$flash = get_flash();
+require_once __DIR__ . '/../includes/functions.php';
+require_admin();
+require_once __DIR__ . '/../includes/models.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf'] ?? '')) { set_flash('danger', 'Invalid request.'); redirect('admin/users.php'); }
@@ -26,6 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     redirect('admin/users.php');
 }
+
+require_once __DIR__ . '/includes/header.php';
+$flash = get_flash();
 $users = get_all_users();
 ?>
 <?php if ($flash): ?><div class="alert alert-<?= e($flash['type']) ?>"><?= e($flash['message']) ?></div><?php endif; ?>

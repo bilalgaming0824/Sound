@@ -41,7 +41,7 @@ render_header($playlist['name'], '');
         <div class="row g-3 g-lg-4 mb-4">
             <?php foreach ($items['songs'] as $s): ?>
                 <div class="col-6 col-md-3 col-lg-2 position-relative">
-                    <?php render_media_card($s, 'song'); ?>
+                    <?php render_media_card($s, 'song', true); ?>
                     <form method="post" action="" class="position-absolute top-0 end-0 p-2" onsubmit="return confirm('Remove from playlist?')">
                         <input type="hidden" name="csrf" value="<?= csrf_token() ?>">
                         <input type="hidden" name="action" value="remove_song">
@@ -60,7 +60,7 @@ render_header($playlist['name'], '');
         <div class="row g-3 g-lg-4">
             <?php foreach ($items['videos'] as $v): ?>
                 <div class="col-6 col-md-3 col-lg-2 position-relative">
-                    <?php render_media_card($v, 'video'); ?>
+                    <?php render_media_card($v, 'video', true); ?>
                     <form method="post" action="" class="position-absolute top-0 end-0 p-2" onsubmit="return confirm('Remove from playlist?')">
                         <input type="hidden" name="csrf" value="<?= csrf_token() ?>">
                         <input type="hidden" name="action" value="remove_video">

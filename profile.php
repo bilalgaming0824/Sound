@@ -230,17 +230,25 @@ render_header('My Profile');
 .profile-cover {
     height: 220px;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+    overflow: hidden;
 }
 .profile-cover::before {
     content: '';
     position: absolute;
     inset: 0;
     background-image:
-        radial-gradient(circle at 20% 50%, rgba(108,99,255,0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 30%, rgba(255,77,109,0.12) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(108,99,255,0.25) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(255,77,109,0.20) 0%, transparent 50%);
+}
+.profile-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'%3E%3Cpath d='M0 30 Q15 15 30 30 T60 30'/%3E%3Cpath d='M0 40 Q15 25 30 40 T60 40'/%3E%3Cpath d='M0 20 Q15 5 30 20 T60 20'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 120px 120px;
 }
 .profile-cover-gradient {
-    background: linear-gradient(to bottom, transparent 0%, rgba(7,7,13,0.4) 100%);
+    background: linear-gradient(to bottom, transparent 0%, rgba(7,7,13,0.6) 100%);
 }
 .profile-info-item {
     display: flex;

@@ -1,14 +1,11 @@
 <?php
 $pageTitle = 'Manage Songs';
 $section = 'songs';
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_admin();
+require_once __DIR__ . '/../includes/models.php';
 
-$artists = get_artists();
-$genres = get_genres();
-$languages = get_languages();
-$albums = get_albums();
-$flash = get_flash();
-
+// Handle POST before any HTML output
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf'] ?? '')) { set_flash('danger', 'Invalid request.'); redirect('admin/songs.php'); }
     $action = $_POST['action'] ?? '';
@@ -30,6 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect('admin/songs.php');
 }
 
+require_once __DIR__ . '/includes/header.php';
+
+$artists = get_artists();
+$genres = get_genres();
+$languages = get_languages();
+$albums = get_albums();
+$flash = get_flash();
 $songs = get_songs();
 ?>
 <?php if ($flash): ?><div class="alert alert-<?= e($flash['type']) ?>"><?= e($flash['message']) ?></div><?php endif; ?>
@@ -43,7 +47,7 @@ $songs = get_songs();
         <tbody>
         <?php foreach ($songs as $s): ?>
             <tr>
-                <td><img src="<?= e($s['image_url']) ?>" alt="" class="thumb-sm"></td>
+                <td><img src="<?= e(media_url($s['image_url'])) ?>" alt="" class="thumb-sm"></td>
                 <td class="fw-semibold text-white"><?= e($s['title']) ?></td>
                 <td><?= e($s['artist_name'] ?? '—') ?></td>
                 <td><?= e($s['album_title'] ?? '—') ?></td>

@@ -4,7 +4,7 @@
  * $item must have: id, title, image_url, artist_name, year, duration, is_new, views
  * $type = 'song' | 'video'
  */
-function render_media_card(array $item, string $type): void {
+function render_media_card(array $item, string $type, bool $skip_col = false): void {
     $img = media_url($item['image_url']);
     $link = $type === 'video' ? 'video_detail.php?id=' . $item['id'] : 'song_detail.php?id=' . $item['id'];
     $icon = $type === 'video' ? 'bi-play-btn' : 'bi-music-note-beamed';
@@ -13,8 +13,9 @@ function render_media_card(array $item, string $type): void {
     $rawViews = intval($item['views'] ?? 0);
     $views = $rawViews >= 1000 ? round($rawViews / 1000, 1) . 'K' : $rawViews;
     $year = $item['year'] ?? '';
-    ?>
+    if (!$skip_col): ?>
     <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+    <?php endif; ?>
         <a href="<?= url($link) ?>" class="mc-card text-decoration-none d-block">
             <div class="mc-thumb">
                 <img src="<?= e($img) ?>" alt="<?= e($item['title']) ?>" loading="lazy">
@@ -33,7 +34,9 @@ function render_media_card(array $item, string $type): void {
                 </div>
             </div>
         </a>
+    <?php if (!$skip_col): ?>
     </div>
+    <?php endif; ?>
     <?php
 }
 

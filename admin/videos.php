@@ -1,14 +1,11 @@
 <?php
 $pageTitle = 'Manage Videos';
 $section = 'videos';
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_admin();
+require_once __DIR__ . '/../includes/models.php';
 
-$artists = get_artists();
-$genres = get_genres();
-$languages = get_languages();
-$albums = get_albums();
-$flash = get_flash();
-
+// Handle POST before any HTML output
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf'] ?? '')) { set_flash('danger', 'Invalid request.'); redirect('admin/videos.php'); }
     $action = $_POST['action'] ?? '';
@@ -42,6 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect('admin/videos.php');
 }
 
+require_once __DIR__ . '/includes/header.php';
+
+$artists = get_artists();
+$genres = get_genres();
+$languages = get_languages();
+$albums = get_albums();
+$flash = get_flash();
 $videos = get_videos();
 ?>
 <?php if ($flash): ?><div class="alert alert-<?= e($flash['type']) ?>"><?= e($flash['message']) ?></div><?php endif; ?>
@@ -55,7 +59,7 @@ $videos = get_videos();
         <tbody>
         <?php foreach ($videos as $v): ?>
             <tr>
-                <td><img src="<?= e($v['image_url']) ?>" alt="" class="thumb-sm"></td>
+                <td><img src="<?= e(media_url($v['image_url'])) ?>" alt="" class="thumb-sm"></td>
                 <td class="fw-semibold text-white"><?= e($v['title']) ?></td>
                 <td><?= e($v['artist_name'] ?? '—') ?></td>
                 <td><?= e($v['year'] ?? '—') ?></td>

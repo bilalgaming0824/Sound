@@ -1,8 +1,9 @@
 <?php
 $pageTitle = 'Manage Categories';
 $section = 'categories';
-require_once __DIR__ . '/includes/header.php';
-$flash = get_flash();
+require_once __DIR__ . '/../includes/functions.php';
+require_admin();
+require_once __DIR__ . '/../includes/models.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf'] ?? '')) { set_flash('danger', 'Invalid request.'); redirect('admin/categories.php'); }
@@ -22,6 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     redirect('admin/categories.php');
 }
+
+require_once __DIR__ . '/includes/header.php';
+$flash = get_flash();
 $genres = get_genres();
 $languages = get_languages();
 ?>

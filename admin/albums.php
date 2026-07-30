@@ -1,9 +1,9 @@
 <?php
 $pageTitle = 'Manage Albums';
 $section = 'albums';
-require_once __DIR__ . '/includes/header.php';
-$artists = get_artists();
-$flash = get_flash();
+require_once __DIR__ . '/../includes/functions.php';
+require_admin();
+require_once __DIR__ . '/../includes/models.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf'] ?? '')) { set_flash('danger', 'Invalid request.'); redirect('admin/albums.php'); }
@@ -18,6 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     redirect('admin/albums.php');
 }
+
+require_once __DIR__ . '/includes/header.php';
+$artists = get_artists();
+$flash = get_flash();
 $albums = get_albums();
 ?>
 <?php if ($flash): ?><div class="alert alert-<?= e($flash['type']) ?>"><?= e($flash['message']) ?></div><?php endif; ?>

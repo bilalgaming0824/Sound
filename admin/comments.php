@@ -1,8 +1,9 @@
 <?php
 $pageTitle = 'Manage Reviews';
 $section = 'comments';
-require_once __DIR__ . '/includes/header.php';
-$flash = get_flash();
+require_once __DIR__ . '/../includes/functions.php';
+require_admin();
+require_once __DIR__ . '/../includes/models.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf'] ?? '')) { set_flash('danger', 'Invalid request.'); redirect('admin/comments.php'); }
@@ -21,6 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     redirect('admin/comments.php');
 }
+
+require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/../includes/media_card.php';
+$flash = get_flash();
 
 $comments = db()->query("SELECT c.*, u.username, u.avatar_url,
     CASE WHEN c.media_type='song' THEN s.title ELSE v.title END AS media_title

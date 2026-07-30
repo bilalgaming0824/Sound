@@ -1,8 +1,9 @@
 <?php
 $pageTitle = 'Manage Artists';
 $section = 'artists';
-require_once __DIR__ . '/includes/header.php';
-$flash = get_flash();
+require_once __DIR__ . '/../includes/functions.php';
+require_admin();
+require_once __DIR__ . '/../includes/models.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf'] ?? '')) { set_flash('danger', 'Invalid request.'); redirect('admin/artists.php'); }
@@ -17,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     redirect('admin/artists.php');
 }
+
+require_once __DIR__ . '/includes/header.php';
+$flash = get_flash();
 $artists = get_artists();
 ?>
 <?php if ($flash): ?><div class="alert alert-<?= e($flash['type']) ?>"><?= e($flash['message']) ?></div><?php endif; ?>
