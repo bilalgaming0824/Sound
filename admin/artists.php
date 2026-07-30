@@ -9,8 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf'] ?? '')) { set_flash('danger', 'Invalid request.'); redirect('admin/artists.php'); }
     $action = $_POST['action'] ?? '';
     if ($action === 'add') {
+        $imageUrl = handle_upload('image_file', 'image') ?? trim($_POST['image_url'] ?? '');
         db()->prepare("INSERT INTO artists (name, bio, image_url, social_facebook, social_twitter, social_instagram) VALUES (?,?,?,?,?,?)")
-            ->execute([trim($_POST['name']), trim($_POST['bio'] ?? ''), trim($_POST['image_url'] ?? ''), trim($_POST['social_facebook'] ?? ''), trim($_POST['social_twitter'] ?? ''), trim($_POST['social_instagram'] ?? '')]);
+            ->execute([trim($_POST['name']), trim($_POST['bio'] ?? ''), $imageUrl, trim($_POST['social_facebook'] ?? ''), trim($_POST['social_twitter'] ?? ''), trim($_POST['social_instagram'] ?? '')]);
         set_flash('success', 'Artist added.');
     } elseif ($action === 'delete') {
         db()->prepare("DELETE FROM artists WHERE id = ?")->execute([(int)$_POST['id']]);
@@ -53,13 +54,13 @@ $artists = get_artists();
 </div>
 <div class="modal fade" id="addModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
-        <form method="post" action="" class="modal-content card-media">
+        <form method="post" action="" enctype="multipart/form-data" class="modal-content card-media">
             <input type="hidden" name="csrf" value="<?= csrf_token() ?>">
             <input type="hidden" name="action" value="add">
             <div class="modal-header border-0"><h5 class="modal-title text-white">Add Artist</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
             <div class="modal-body row g-3">
                 <div class="col-md-6"><label class="form-label">Name *</label><input name="name" class="form-control" required></div>
-                <div class="col-md-6"><label class="form-label">Image URL</label><input name="image_url" class="form-control" placeholder="https://…"></div>
+                <div class="col-md-6"><label class="form-label">Artist Photo (JPG/PNG)</label><input type="file" name="image_file" accept=".jpg,.jpeg,.png,.webp" class="form-control"><div class="form-text">or paste URL:</div><input name="image_url" class="form-control" placeholder="https://…"></div>
                 <div class="col-12"><label class="form-label">Bio</label><textarea name="bio" rows="2" class="form-control"></textarea></div>
                 <div class="col-md-4"><label class="form-label">Facebook</label><input name="social_facebook" class="form-control"></div>
                 <div class="col-md-4"><label class="form-label">Twitter/X</label><input name="social_twitter" class="form-control"></div>

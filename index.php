@@ -157,7 +157,7 @@ render_header('Home', 'home');
 
         <div class="lm-track" id="lmTrack" data-carousel="latest-music">
             <?php foreach ($latestSongs as $s):
-                $img = $s['image_url'] ?: 'public/images/song-1.webp';
+                $img = media_url($s['image_url'] ?? null);
                 $dur = $s['duration'] ?? '0:00';
                 $rawViews = intval($s['views'] ?? 0);
                 $views = $rawViews >= 1000 ? round($rawViews/1000, 1) . 'K' : $rawViews;
@@ -215,7 +215,7 @@ render_header('Home', 'home');
         <button class="lm-arrow lv-arrow-prev" data-carousel-prev="latest-videos" id="lvPrev" aria-label="Previous"><i class="bi bi-chevron-left"></i></button>
         <div class="lm-track" id="lvTrack" data-carousel="latest-videos">
             <?php foreach ($latestVideos as $v):
-                $img = $v['image_url'] ?: 'public/images/video-1.webp';
+                $img = media_url($v['image_url'] ?? null);
                 $dur = $v['duration'] ?? '0:00';
                 $rawViews = intval($v['views'] ?? 0);
                 $views = $rawViews >= 1000 ? round($rawViews/1000, 1) . 'K' : $rawViews;
@@ -268,7 +268,7 @@ render_header('Home', 'home');
             $trendingDisplay = array_slice($trendingSongs, 0, 12);
             $rankColors = ['#6c63ff','#0d9488','#2563eb','#10b981','#f97316','#ec4899','#8b5cf6','#06b6d4'];
             foreach ($trendingDisplay as $rank => $s):
-                $img = $s['image_url'] ?: 'public/images/song-1.webp';
+                $img = media_url($s['image_url'] ?? null);
                 $dur = $s['duration'] ?? '0:00';
                 $rawViews = intval($s['views'] ?? 0);
                 $views = $rawViews >= 1000 ? round($rawViews/1000, 1) . 'K' : $rawViews;
@@ -351,7 +351,7 @@ render_header('Home', 'home');
 
         <div class="fa-grid">
             <?php foreach ($albums as $al):
-                $img = $al['image_url'] ?: 'public/images/album-1.webp';
+                $img = media_url($al['image_url'] ?? null);
                 $songCount = (int)($al['song_count'] ?? 0);
                 $year = !empty($al['year']) ? e($al['year']) : (date('Y'));
             ?>
@@ -424,7 +424,7 @@ render_header('Home', 'home');
 
         <div class="fart-grid">
             <?php foreach ($artists as $a):
-                $img = $a['image_url'] ?: 'public/images/artist-arijit.webp';
+                $img = media_url($a['image_url'] ?? null);
                 $songCount = (int)($a['song_count'] ?? 0);
                 $listeners = max($songCount * 340, 1200);
                 $genreName = !empty($a['genre']) ? e($a['genre']) : 'Multi-genre';

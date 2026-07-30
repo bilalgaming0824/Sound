@@ -9,8 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf'] ?? '')) { set_flash('danger', 'Invalid request.'); redirect('admin/albums.php'); }
     $action = $_POST['action'] ?? '';
     if ($action === 'add') {
+        $imageUrl = handle_upload('image_file', 'image') ?? trim($_POST['image_url'] ?? '');
         db()->prepare("INSERT INTO albums (title, artist_id, year, image_url) VALUES (?,?,?,?)")
-            ->execute([trim($_POST['title']), (int)($_POST['artist_id'] ?? 0) ?: null, (int)($_POST['year'] ?? 0) ?: null, trim($_POST['image_url'] ?? '')]);
+            ->execute([trim($_POST['title']), (int)($_POST['artist_id'] ?? 0) ?: null, (int)($_POST['year'] ?? 0) ?: null, $imageUrl]);
         set_flash('success', 'Album added.');
     } elseif ($action === 'delete') {
         db()->prepare("DELETE FROM albums WHERE id = ?")->execute([(int)$_POST['id']]);
@@ -55,7 +56,7 @@ $albums = get_albums();
 </div>
 <div class="modal fade" id="addModal" tabindex="-1">
     <div class="modal-dialog">
-        <form method="post" action="" class="modal-content card-media">
+        <form method="post" action="" enctype="multipart/form-data" class="modal-content card-media">
             <input type="hidden" name="csrf" value="<?= csrf_token() ?>">
             <input type="hidden" name="action" value="add">
             <div class="modal-header border-0"><h5 class="modal-title text-white">Add Album</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
@@ -63,7 +64,7 @@ $albums = get_albums();
                 <div class="col-12"><label class="form-label">Title *</label><input name="title" class="form-control" required></div>
                 <div class="col-md-6"><label class="form-label">Artist</label><select name="artist_id" class="form-select"><option value="">—</option><?php foreach ($artists as $a): ?><option value="<?= $a['id'] ?>"><?= e($a['name']) ?></option><?php endforeach; ?></select></div>
                 <div class="col-md-6"><label class="form-label">Year</label><input type="number" name="year" class="form-control"></div>
-                <div class="col-12"><label class="form-label">Image URL</label><input name="image_url" class="form-control" placeholder="https://…"></div>
+                <div class="col-12"><label class="form-label">Cover Image (JPG/PNG)</label><input type="file" name="image_file" accept=".jpg,.jpeg,.png,.webp" class="form-control"><div class="form-text">or paste URL:</div><input name="image_url" class="form-control" placeholder="https://…"></div>
             </div>
             <div class="modal-footer border-0"><button class="btn btn-primary">Add Album</button></div>
         </form>

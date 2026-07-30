@@ -49,7 +49,7 @@ $cards = [
             <h3 class="fw-bold text-white mb-3">Recent Songs</h3>
             <?php $recent = get_latest_songs(5); foreach ($recent as $s): ?>
                 <div class="d-flex align-items-center gap-3 py-2 border-bottom border-ink">
-                    <img src="<?= e($s['image_url']) ?>" alt="" class="thumb-sm">
+                    <img src="<?= e(media_url($s['image_url'] ?? null)) ?>" alt="" class="thumb-sm">
                     <div class="flex-grow-1"><div class="fw-semibold text-white small"><?= e($s['title']) ?></div><div class="text-secondary" style="font-size:0.75rem"><?= e($s['artist_name'] ?? '') ?></div></div>
                     <span class="small text-secondary"><?= number_format($s['views']) ?> views</span>
                 </div>

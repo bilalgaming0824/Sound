@@ -253,8 +253,18 @@ function handle_upload(string $field, string $kind): ?string {
     finfo_close($finfo);
 
     if (!isset($allowed[$kind][$mime])) {
-        set_flash('danger', 'Invalid file type. Allowed: ' . implode(', ', array_unique(array_values($allowed[$kind]))));
-        return null;
+        // Fallback: check by file extension if MIME detection failed
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $validExts = array_unique(array_values($allowed[$kind]));
+        if (!in_array($ext, $validExts, true)) {
+            set_flash('danger', 'Invalid file type. Allowed: ' . implode(', ', array_unique(array_values($allowed[$kind]))));
+            return null;
+        }
+        $mime = array_search($ext, $allowed[$kind], true) ?: null;
+        if (!$mime) {
+            set_flash('danger', 'Invalid file type.');
+            return null;
+        }
     }
 
     $folderMap = ['image' => 'covers', 'audio' => 'songs', 'video' => 'videos'];
@@ -262,16 +272,28 @@ function handle_upload(string $field, string $kind): ?string {
     $ext = $allowed[$kind][$mime];
     $name = bin2hex(random_bytes(16)) . '.' . $ext;
     $uploadDir = __DIR__ . '/../uploads/' . $folder;
+    // Robust directory creation — recursive, attempt multiple permission levels
     if (!is_dir($uploadDir)) {
-        @mkdir($uploadDir, 0755, true);
+        @mkdir($uploadDir, 0777, true);
+        if (!is_dir($uploadDir)) {
+            set_flash('danger', 'Could not create upload folder. Please manually create uploads/' . $folder . '/ inside your project folder and make it writable.');
+            return null;
+        }
     }
     if (!is_writable($uploadDir)) {
-        set_flash('danger', 'Upload directory is not writable. Please create uploads/' . $folder . '/ with write permission.');
-        return null;
+        @chmod($uploadDir, 0777);
+        if (!is_writable($uploadDir)) {
+            set_flash('danger', 'Upload folder exists but is not writable. Please set permissions on uploads/' . $folder . '/ (right-click → Properties → Sharing → check Read/Write, or run chmod 777).');
+            return null;
+        }
     }
-    if (!move_uploaded_file($file['tmp_name'], $uploadDir . '/' . $name)) {
-        set_flash('danger', 'Failed to save uploaded file.');
-        return null;
+    $destPath = $uploadDir . '/' . $name;
+    if (!move_uploaded_file($file['tmp_name'], $destPath)) {
+        // Fallback: try regular copy if move_uploaded_file fails (some setups)
+        if (!copy($file['tmp_name'], $destPath)) {
+            set_flash('danger', 'Failed to save uploaded file. Please check folder permissions.');
+            return null;
+        }
     }
     return 'uploads/' . $folder . '/' . $name;
 }

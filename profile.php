@@ -65,16 +65,18 @@ render_header('My Profile');
         </div>
     <?php endif; ?>
 
-    <div class="profile-cover rounded-top-4 position-relative overflow-hidden mb-0">
-        <div class="profile-cover-gradient position-absolute inset-0"></div>
-    </div>
+    <div class="card-media p-0 rounded-4 overflow-hidden mb-0 profile-hero-card">
 
-    <div class="card-media px-4 pb-4 pt-0 rounded-bottom-4 border-top-0">
+        <div class="profile-cover position-relative overflow-hidden">
+            <div class="profile-cover-gradient position-absolute" style="inset:0"></div>
+        </div>
+
+        <div class="px-4 pb-4 pt-0">
 
         <div class="d-flex flex-column flex-md-row align-items-md-end gap-3" style="margin-top:-60px">
             <div class="position-relative flex-shrink-0">
                 <?php if (!empty($user['avatar_url'])): ?>
-                    <img src="<?= e($user['avatar_url']) ?>" alt="<?= e($user['username']) ?>"
+                    <img src="<?= e(media_url($user['avatar_url'] ?? null)) ?>" alt="<?= e($user['username']) ?>"
                          class="rounded-4 shadow-lg"
                          style="width:120px;height:120px;object-fit:cover;border:4px solid var(--dark)">
                 <?php else: ?>
@@ -110,6 +112,8 @@ render_header('My Profile');
         <?php if (!empty($user['bio'])): ?>
             <p class="text-secondary mt-3 mb-0" style="max-width:600px"><?= e($user['bio']) ?></p>
         <?php endif; ?>
+        </div>
+    </div>
     </div>
 
     <!-- Profile Info Display -->
