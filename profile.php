@@ -99,6 +99,12 @@ render_header('My Profile');
                     <span class="chip"><i class="bi bi-calendar3"></i> Joined <?= format_date($user['created_at']) ?></span>
                 </div>
             </div>
+
+            <div class="pb-2">
+                <button class="btn btn-primary" id="editProfileBtn" onclick="document.getElementById('editProfileForm').style.display='block';this.style.display='none'">
+                    <i class="bi bi-pencil-square"></i> Edit Profile
+                </button>
+            </div>
         </div>
 
         <?php if (!empty($user['bio'])): ?>
@@ -106,7 +112,80 @@ render_header('My Profile');
         <?php endif; ?>
     </div>
 
+    <!-- Profile Info Display -->
     <div class="card-media p-4 mt-4">
+        <h2 class="fw-bold text-white mb-4"><i class="bi bi-info-circle"></i> My Information</h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="profile-info-item">
+                    <div class="profile-info-icon"><i class="bi bi-person-badge"></i></div>
+                    <div>
+                        <p class="profile-info-label">Full Name</p>
+                        <p class="profile-info-value"><?= e($user['full_name']) ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-info-item">
+                    <div class="profile-info-icon"><i class="bi bi-envelope"></i></div>
+                    <div>
+                        <p class="profile-info-label">Email Address</p>
+                        <p class="profile-info-value"><?= e($user['email']) ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-info-item">
+                    <div class="profile-info-icon"><i class="bi bi-telephone"></i></div>
+                    <div>
+                        <p class="profile-info-label">Phone Number</p>
+                        <p class="profile-info-value"><?= e($user['phone']) ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-info-item">
+                    <div class="profile-info-icon"><i class="bi bi-geo-alt"></i></div>
+                    <div>
+                        <p class="profile-info-label">Address</p>
+                        <p class="profile-info-value"><?= e($user['address']) ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-info-item">
+                    <div class="profile-info-icon"><i class="bi bi-person-check"></i></div>
+                    <div>
+                        <p class="profile-info-label">Username</p>
+                        <p class="profile-info-value"><?= e($user['username']) ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-info-item">
+                    <div class="profile-info-icon"><i class="bi bi-calendar3"></i></div>
+                    <div>
+                        <p class="profile-info-label">Member Since</p>
+                        <p class="profile-info-value"><?= format_date($user['created_at']) ?></p>
+                    </div>
+                </div>
+            </div>
+            <?php if (!empty($user['bio'])): ?>
+            <div class="col-12">
+                <div class="profile-info-item">
+                    <div class="profile-info-icon"><i class="bi bi-chat-left-text"></i></div>
+                    <div>
+                        <p class="profile-info-label">Bio</p>
+                        <p class="profile-info-value"><?= e($user['bio']) ?></p>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <!-- Edit Profile Form (hidden by default) -->
+    <div class="card-media p-4 mt-4" id="editProfileForm" style="display:none">
         <h2 class="fw-bold text-white mb-1"><i class="bi bi-pencil-square"></i> Edit Profile</h2>
         <p class="text-secondary small mb-4">Update your personal information, avatar, and password.</p>
         <form method="post" action="">
@@ -139,7 +218,10 @@ render_header('My Profile');
                     <small class="text-secondary">Minimum 6 characters.</small>
                 </div>
             </div>
-            <button class="btn btn-primary mt-4 px-4"><i class="bi bi-save"></i> Save Changes</button>
+            <div class="d-flex gap-2 mt-4">
+                <button class="btn btn-primary px-4"><i class="bi bi-save"></i> Save Changes</button>
+                <button type="button" class="btn btn-ghost px-4" onclick="document.getElementById('editProfileForm').style.display='none';document.getElementById('editProfileBtn').style.display='inline-block'"><i class="bi bi-x-circle"></i> Cancel</button>
+            </div>
         </form>
     </div>
 </div>
@@ -159,6 +241,46 @@ render_header('My Profile');
 }
 .profile-cover-gradient {
     background: linear-gradient(to bottom, transparent 0%, rgba(7,7,13,0.4) 100%);
+}
+.profile-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.2s ease;
+}
+.profile-info-item:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+}
+.profile-info-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, rgba(108,99,255,0.2), rgba(255,77,109,0.15));
+    color: #a5b4fc;
+}
+.profile-info-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #8b93a7;
+    margin: 0 0 2px 0;
+}
+.profile-info-value {
+    font-size: 0.95rem;
+    color: #fff;
+    font-weight: 500;
+    margin: 0;
+    word-break: break-word;
 }
 </style>
 

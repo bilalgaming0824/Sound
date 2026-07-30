@@ -44,7 +44,7 @@ render_header($song['title'], 'music');
 <!-- HERO -->
 <section class="position-relative overflow-hidden">
     <div class="position-absolute inset-0" style="z-index:-1">
-        <img src="<?= e($song['image_url']) ?>" alt="" class="w-100 h-100" style="object-fit:cover;opacity:0.2;filter:blur(24px)">
+        <img src="<?= e(media_url($song['image_url'])) ?>" alt="" class="w-100 h-100" style="object-fit:cover;opacity:0.2;filter:blur(24px)">
         <div class="position-absolute inset-0" style="background:linear-gradient(to bottom, rgba(7,7,13,0.7), var(--ink-950))"></div>
     </div>
     <div class="container-fluid px-3 px-lg-4 py-4">

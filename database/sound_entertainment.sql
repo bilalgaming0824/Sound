@@ -363,14 +363,14 @@ INSERT INTO albums (title, artist_id, year, image_url) VALUES
 ('Tera Ban Jaunga', 2, 2024, 'public/images/album-2.webp'),
 ('Pehli Nazar', 3, 2023, 'public/images/album-3.webp'),
 ('London Thumakda', 4, 2024, 'public/images/album-4.webp'),
-('Barfi', 5, 2023, 'public/images/album-5.webp.webp'),
-('Rockstar', 6, 2022, 'public/images/artist-mohit.webp'),
-('Chennai Express', 7, 2023, 'public/images/artist-vishal.webp'),
-('Dil Se', 8, 2022, 'public/images/artist-ar-rahman.webp'),
-('Lut Gaye', 9, 2024, 'public/images/album-9.webp.webp'),
-('Midnights', 10, 2024, 'public/images/album-10.webp.webp'),
-('Shape', 11, 2023, 'public/images/album-11.webp.webp'),
-('After Hours', 12, 2023, 'public/images/album-12.webp.webp');
+('Barfi', 5, 2023, 'public/images/album-5.webp'),
+('Rockstar', 6, 2022, 'public/images/album-6.webp'),
+('Chennai Express', 7, 2023, 'public/images/album-7.webp'),
+('Dil Se', 8, 2022, 'public/images/album-8.webp'),
+('Lut Gaye', 9, 2024, 'public/images/album-9.webp'),
+('Midnights', 10, 2024, 'public/images/album-10.webp'),
+('Shape', 11, 2023, 'public/images/album-11.webp'),
+('After Hours', 12, 2023, 'public/images/album-12.webp');
 
 -- 24 songs: 18 Hindi (75%), 6 English (25%)
 -- Working audio: SoundHelix royalty-free MP3 samples
@@ -406,28 +406,28 @@ INSERT INTO songs (title, description, image_url, audio_url, artist_id, album_id
 -- Additional songs for all categories (Rock, Pop, Classical, Hip Hop, Sufi, Punjabi, Electronic, Lo-Fi)
 -- Varied per-artist song counts
 INSERT INTO songs (title, description, image_url, audio_url, artist_id, album_id, genre_id, language_id, year, duration, is_new, views) VALUES
-('Bohemian Rhapsody','An epic rock masterpiece with operatic sections.','public/images/song-25.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',6,6,4,1,2022,354,1,15000),
-('Smells Like Teen Spirit','A grunge rock anthem that defined a generation.','public/images/song-26.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3',6,6,4,1,2022,301,0,8200),
-('Stairway to Heaven','A legendary rock ballad building from soft to powerful.','public/images/song-27.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3',6,6,4,1,2022,482,0,9100),
-('Shape of My Heart','A contemplative pop rock track about love and loss.','public/images/song-28.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3',11,11,3,2,2023,265,0,4500),
-('Sugar','A sweet English pop track with catchy hooks.','public/images/song-29.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3',11,11,3,2,2023,235,1,7800),
-('Levitating','A disco-infused English pop dance track.','public/images/song-30.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3',10,10,3,2,2024,203,1,9200),
-('Raag Yaman','A serene classical instrumental piece in Raga Yaman.','public/images/song-31.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3',8,8,7,1,2022,420,0,2100),
-('Kun Faya Kun','A devotional Sufi track that stirs the soul.','public/images/song-32.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3',8,8,8,1,2022,255,1,12000),
-('Tum Tak','A beautiful Sufi-inspired romantic Hindi song.','public/images/song-33.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',2,2,8,1,2023,298,0,3400),
-('Lover','A dreamy English pop love song.','public/images/song-34.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',10,10,3,2,2024,221,0,5600),
-('Dhivehi Remix','An electronic dance track with pulsating beats.','public/images/song-35.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',12,12,11,2,2023,198,1,4300),
-('Starlight Lo-Fi','A chill lo-fi beat for late night studying.','public/images/song-36.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',12,12,10,2,2024,185,0,2800),
-('Punjabi Wedding','A high-energy Punjabi dance track for celebrations.','https://images.pexels.com/photos/9626651/pexels-photo-9626651.jpeg?auto=compress&cs=tinysrgb&w=600','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',4,4,12,3,2024,192,1,11000),
-('Dhol Beats','A rhythmic Punjabi track with infectious dhol beats.','https://images.pexels.com/photos/9626651/pexels-photo-9626651.jpeg?auto=compress&cs=tinysrgb&w=600','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',4,4,12,3,2023,205,0,6700),
-('Lose Yourself','A motivational hip hop anthem about seizing the moment.','public/images/song-39.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',11,11,5,2,2022,326,1,18000),
-('Gods Plan','A chart-topping English hip hop track.','public/images/song-40.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',11,11,5,2,2023,199,0,7500),
-('R&B Groove','A smooth R&B track with silky vocals.','public/images/song-41.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',12,12,6,2,2024,247,0,3900),
-('Earned It','A dark sensual English R&B track.','public/images/song-42.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3',12,12,6,2,2023,254,1,6200),
-('Pop Star Life','An upbeat English pop anthem about fame.','public/images/song-43.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3',10,10,3,2,2024,188,1,5400),
-('Highway Tune','A classic rock riff-driven track.','public/images/song-44.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3',6,6,4,1,2023,278,0,4800),
-('Sufi Soul','A meditative Sufi track with haunting vocals.','public/images/song-45.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3',8,8,8,1,2023,310,0,4200),
-('Electronic Dreams','An atmospheric electronic track for late nights.','public/images/song-46.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3',12,12,11,2,2024,215,1,3600);
+('Bohemian Rhapsody','An epic rock masterpiece with operatic sections.','public/images/song-1.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',6,6,4,1,2022,354,1,15000),
+('Smells Like Teen Spirit','A grunge rock anthem that defined a generation.','public/images/song-2.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3',6,6,4,1,2022,301,0,8200),
+('Stairway to Heaven','A legendary rock ballad building from soft to powerful.','public/images/song-3.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3',6,6,4,1,2022,482,0,9100),
+('Shape of My Heart','A contemplative pop rock track about love and loss.','public/images/song-4.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3',11,11,3,2,2023,265,0,4500),
+('Sugar','A sweet English pop track with catchy hooks.','public/images/song-5.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3',11,11,3,2,2023,235,1,7800),
+('Levitating','A disco-infused English pop dance track.','public/images/song-6.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3',10,10,3,2,2024,203,1,9200),
+('Raag Yaman','A serene classical instrumental piece in Raga Yaman.','public/images/song-7.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3',8,8,7,1,2022,420,0,2100),
+('Kun Faya Kun','A devotional Sufi track that stirs the soul.','public/images/song-8.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3',8,8,8,1,2022,255,1,12000),
+('Tum Tak','A beautiful Sufi-inspired romantic Hindi song.','public/images/song-9.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',2,2,8,1,2023,298,0,3400),
+('Lover','A dreamy English pop love song.','public/images/song-10.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',10,10,3,2,2024,221,0,5600),
+('Dhivehi Remix','An electronic dance track with pulsating beats.','public/images/song-11.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',12,12,11,2,2023,198,1,4300),
+('Starlight Lo-Fi','A chill lo-fi beat for late night studying.','public/images/song-12.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',12,12,10,2,2024,185,0,2800),
+('Punjabi Wedding','A high-energy Punjabi dance track for celebrations.','public/images/song-13.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',4,4,12,3,2024,192,1,11000),
+('Dhol Beats','A rhythmic Punjabi track with infectious dhol beats.','public/images/song-14.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',4,4,12,3,2023,205,0,6700),
+('Lose Yourself','A motivational hip hop anthem about seizing the moment.','public/images/song-15.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',11,11,5,2,2022,326,1,18000),
+('Gods Plan','A chart-topping English hip hop track.','public/images/song-16.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',11,11,5,2,2023,199,0,7500),
+('R&B Groove','A smooth R&B track with silky vocals.','public/images/song-17.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',12,12,6,2,2024,247,0,3900),
+('Earned It','A dark sensual English R&B track.','public/images/song-18.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3',12,12,6,2,2023,254,1,6200),
+('Pop Star Life','An upbeat English pop anthem about fame.','public/images/song-19.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3',10,10,3,2,2024,188,1,5400),
+('Highway Tune','A classic rock riff-driven track.','public/images/song-20.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3',6,6,4,1,2023,278,0,4800),
+('Sufi Soul','A meditative Sufi track with haunting vocals.','public/images/song-21.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3',8,8,8,1,2023,310,0,4200),
+('Electronic Dreams','An atmospheric electronic track for late nights.','public/images/song-22.webp','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3',12,12,11,2,2024,215,1,3600);
 
 INSERT INTO videos (title, description, image_url, video_url, album_id, genre_id, language_id, year, duration, is_new, views) VALUES
 ('Tum Hi Ho — Music Video','The official emotional music video for the Hindi romantic ballad.','public/images/video-1.webp','https://www.youtube.com/watch?v=81qmmlsIE3k',1,2,1,2024,292,1,12000),

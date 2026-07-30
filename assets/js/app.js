@@ -195,6 +195,7 @@
 window.toggleFavourite = function (btn) {
   var id = btn.getAttribute('data-id');
   var type = btn.getAttribute('data-type');
+  var csrf = btn.getAttribute('data-csrf') || (document.querySelector('meta[name="csrf-token"]') || {}).content || '';
   if (!id || !type) return;
   btn.classList.toggle('fav-active');
   var active = btn.classList.contains('fav-active');
@@ -202,15 +203,18 @@ window.toggleFavourite = function (btn) {
     method: 'POST',
     credentials: 'same-origin',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'action=' + (active ? 'add' : 'remove') + '&id=' + encodeURIComponent(id) + '&type=' + encodeURIComponent(type)
+    body: 'id=' + encodeURIComponent(id) + '&type=' + encodeURIComponent(type) + '&csrf=' + encodeURIComponent(csrf)
   }).then(function (r) { return r.json(); }).then(function (data) {
-    if (window.showToast) window.showToast(active ? 'Added to favourites' : 'Removed from favourites', active ? 'success' : 'info');
-    var badge = document.getElementById('favBadge');
-    if (badge && typeof data.count !== 'undefined') {
-      badge.textContent = data.count > 99 ? '99+' : data.count;
-      badge.style.display = data.count > 0 ? 'flex' : 'none';
+    if (data.success) {
+      if (window.showToast) window.showToast(data.favourite ? 'Added to favourites' : 'Removed from favourites', data.favourite ? 'success' : 'info');
+    } else {
+      btn.classList.toggle('fav-active');
+      if (window.showToast) window.showToast(data.message || 'Could not update favourite', 'error');
     }
-  }).catch(function () { if (window.showToast) window.showToast('Could not update favourite', 'error'); });
+  }).catch(function () {
+    btn.classList.toggle('fav-active');
+    if (window.showToast) window.showToast('Could not update favourite', 'error');
+  });
 };
 
 window.playSong = function (id, title, artist, img) {

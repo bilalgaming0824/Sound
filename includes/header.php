@@ -42,6 +42,7 @@ function render_header(string $title = '', string $active = '', string $descript
     <meta name="twitter:title" content="<?= e($pageTitle) ?>">
     <meta name="twitter:description" content="<?= e($desc) ?>">
     <meta name="twitter:image" content="<?= e(url('public/images/default-cover.webp')) ?>">
+    <meta name="csrf-token" content="<?= csrf_token() ?>">
     <link rel="icon" type="image/svg+xml" href="<?= asset('img/favicon.svg') ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
