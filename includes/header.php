@@ -48,6 +48,7 @@ function render_header(string $title = '', string $active = '', string $descript
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
     <link href="<?= asset('css/style.css') ?>" rel="stylesheet">
+    <script>window.BASE_URL = '<?= BASE_URL ?>';</script>
 </head>
 <body>
 <!-- PAGE LOADER -->

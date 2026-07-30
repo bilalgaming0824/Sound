@@ -76,10 +76,10 @@ render_header('My Profile');
                 <?php if (!empty($user['avatar_url'])): ?>
                     <img src="<?= e($user['avatar_url']) ?>" alt="<?= e($user['username']) ?>"
                          class="rounded-4 shadow-lg"
-                         style="width:120px;height:120px;object-fit:cover;border:4px solid var(--ink-900)">
+                         style="width:120px;height:120px;object-fit:cover;border:4px solid var(--dark)">
                 <?php else: ?>
                     <div class="rounded-4 d-flex align-items-center justify-content-center shadow-lg fw-bold"
-                         style="width:120px;height:120px;font-size:3rem;background:var(--gradient);border:4px solid var(--ink-900)">
+                         style="width:120px;height:120px;font-size:3rem;background:linear-gradient(135deg,var(--primary),var(--pink));border:4px solid var(--dark)">
                         <?= strtoupper(substr($user['username'], 0, 1)) ?>
                     </div>
                 <?php endif; ?>

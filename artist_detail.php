@@ -10,7 +10,7 @@ $songs = get_artist_songs($id);
 $videos = get_artist_videos($id);
 $albums = get_artist_albums($id);
 render_header($artist['name'], 'artists');
-media_url($artist['image_url'])
+$img = media_url($artist['image_url']);
 ?>
 <div class="container-fluid px-3 px-lg-4 py-3">
     <a href="<?= url('artists.php') ?>" class="link-underline small text-secondary"><i class="bi bi-arrow-left"></i> Back to Artists</a>
@@ -18,7 +18,7 @@ media_url($artist['image_url'])
 <section class="position-relative overflow-hidden">
     <div class="position-absolute inset-0" style="z-index:-1">
         <img src="<?= e($img) ?>" alt="" class="w-100 h-100" style="object-fit:cover;opacity:0.2;filter:blur(24px)">
-        <div class="position-absolute inset-0" style="background:linear-gradient(to bottom, rgba(7,7,13,0.7), var(--ink-950))"></div>
+        <div class="position-absolute inset-0" style="background:linear-gradient(to bottom, rgba(7,7,13,0.7), var(--secondary))"></div>
     </div>
     <div class="container-fluid px-3 px-lg-4 py-4">
         <div class="row g-4 align-items-center">

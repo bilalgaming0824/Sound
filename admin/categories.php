@@ -38,7 +38,7 @@ $languages = get_languages();
             </form>
             <div class="d-flex flex-wrap gap-2">
                 <?php foreach ($genres as $g): ?>
-                    <span class="chip" style="background:var(--ink-800);border:1px solid var(--ink-700)">
+                    <span class="chip" style="background:var(--card);border:1px solid var(--border)">
                         <?= e($g['name']) ?> (<?= $g['song_count'] ?>)
                         <form method="post" action="" class="d-inline" onsubmit="return confirm('Delete this genre?')">
                             <input type="hidden" name="csrf" value="<?= csrf_token() ?>">
@@ -62,7 +62,7 @@ $languages = get_languages();
             </form>
             <div class="d-flex flex-wrap gap-2">
                 <?php foreach ($languages as $l): ?>
-                    <span class="chip" style="background:var(--ink-800);border:1px solid var(--ink-700)">
+                    <span class="chip" style="background:var(--card);border:1px solid var(--border)">
                         <?= e($l['name']) ?>
                         <form method="post" action="" class="d-inline" onsubmit="return confirm('Delete this language?')">
                             <input type="hidden" name="csrf" value="<?= csrf_token() ?>">

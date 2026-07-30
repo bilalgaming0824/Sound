@@ -21,10 +21,10 @@ render_header('Home', 'home');
     <!-- Full-bleed rotating background carousel -->
     <div class="hero-bg-carousel" id="heroBgCarousel">
         <div class="hero-bg-slide active" style="background-image:url('https://images.pexels.com/photos/4218027/pexels-photo-4218027.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-        <div class="hero-bg-slide" style="background-image:url('https://images.pexels.com/photos/3563172/pexels-photo-3563172.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-        <div class="hero-bg-slide" style="background-image:url('https://images.pexels.com/photos/7715754/pexels-photo-7715754.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-        <div class="hero-bg-slide" style="background-image:url('https://images.pexels.com/photos/248963/pexels-photo-248963.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
-        <div class="hero-bg-slide" style="background-image:url('https://images.pexels.com/photos/7715782/pexels-photo-7715782.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+        <div class="hero-bg-slide" style="background-image:url('https://images.pexels.com/photos/167605/pexels-photo-167605.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+        <div class="hero-bg-slide" style="background-image:url('https://images.pexels.com/photos/3122799/pexels-photo-3122799.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+        <div class="hero-bg-slide" style="background-image:url('https://images.pexels.com/photos/13230484/pexels-photo-13230484.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+        <div class="hero-bg-slide" style="background-image:url('https://images.pexels.com/photos/30215324/pexels-photo-30215324.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
     </div>
     <div class="hero-bg-overlay"></div>
 
