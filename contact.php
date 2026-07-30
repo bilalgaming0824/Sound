@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 render_header('Contact', '');
 ?>
-<div class="container py-5 pb-4" style="max-width:900px">
-    <span class="chip chip-brand mb-3"><i class="bi bi-envelope"></i> Get in touch</span>
-    <h1 class="hero-title mb-3">Contact Us</h1>
-    <p class="text-secondary mb-4" style="max-width:600px">Have a question, feedback, or need help? Send us a message and we'll respond as soon as possible.</p>
+<div class="container-fluid px-3 px-lg-4 py-5 pb-4" style="max-width:1100px">
+    <span class="lm-eyebrow d-inline-flex">WE&apos;D LOVE TO HEAR FROM YOU</span>
+    <h1 class="lm-title mt-2 mb-2">Get In <span style="background:linear-gradient(90deg,#a78bfa,#ec4899);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Touch</span></h1>
+    <p class="lm-subtitle mb-4" style="max-width:600px">Have a question, feedback, or need help with something? Drop us a message and our team will respond as soon as possible.</p>
 
     <?php if ($flash): ?>
         <div class="alert alert-<?= e($flash['type']) ?> alert-dismissible fade show"><?= e($flash['message']) ?><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
@@ -28,26 +28,58 @@ render_header('Contact', '');
 
     <div class="row g-4">
         <div class="col-lg-7">
-            <form method="post" action="" class="card-media p-4">
+            <form method="post" action="" class="card-media p-4 p-lg-5">
                 <input type="hidden" name="csrf" value="<?= csrf_token() ?>">
-                <div class="mb-3"><label class="form-label">Your Name *</label><input name="name" class="form-control" required></div>
-                <div class="mb-3"><label class="form-label">Email *</label><input type="email" name="email" class="form-control" required></div>
-                <div class="mb-3"><label class="form-label">Message *</label><textarea name="message" rows="5" class="form-control" required></textarea></div>
-                <button class="btn btn-primary"><i class="bi bi-send me-2"></i>Send Message</button>
+                <div class="mb-3">
+                    <label class="form-label"><i class="bi bi-person me-1"></i>Your Name *</label>
+                    <input name="name" class="form-control form-control-lg" placeholder="Enter your full name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><i class="bi bi-envelope me-1"></i>Email Address *</label>
+                    <input type="email" name="email" class="form-control form-control-lg" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label"><i class="bi bi-chat-dots me-1"></i>Your Message *</label>
+                    <textarea name="message" rows="6" class="form-control form-control-lg" placeholder="Tell us how we can help…" required></textarea>
+                </div>
+                <button class="btn btn-primary btn-lg w-100"><i class="bi bi-send me-2"></i>Send Message</button>
             </form>
         </div>
+
         <div class="col-lg-5">
             <div class="card-media p-4 mb-3">
-                <h3 class="fw-bold text-white mb-3"><i class="bi bi-geo-alt text-brand me-2"></i>Address</h3>
-                <p class="text-secondary small mb-0">SOUND Entertainment<br>123 Music Avenue<br>Mumbai, India 400001</p>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="hero-stat-icon" style="width:48px;height:48px;font-size:1.4rem"><i class="bi bi-geo-alt-fill"></i></span>
+                    <h3 class="fw-bold text-white mb-0" style="font-family:'Sora',sans-serif">Visit Us</h3>
+                </div>
+                <p class="text-secondary small mb-0 ps-1">SOUND Entertainment<br>123 Music Avenue<br>Mumbai, India 400001</p>
             </div>
             <div class="card-media p-4 mb-3">
-                <h3 class="fw-bold text-white mb-3"><i class="bi bi-envelope text-brand me-2"></i>Email</h3>
-                <p class="text-secondary small mb-0">support@soundentertainment.com<br>info@soundentertainment.com</p>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="hero-stat-icon" style="width:48px;height:48px;font-size:1.4rem"><i class="bi bi-envelope-fill"></i></span>
+                    <h3 class="fw-bold text-white mb-0" style="font-family:'Sora',sans-serif">Email Us</h3>
+                </div>
+                <p class="text-secondary small mb-0 ps-1">support@soundentertainment.com<br>info@soundentertainment.com</p>
+            </div>
+            <div class="card-media p-4 mb-3">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="hero-stat-icon" style="width:48px;height:48px;font-size:1.4rem"><i class="bi bi-clock-fill"></i></span>
+                    <h3 class="fw-bold text-white mb-0" style="font-family:'Sora',sans-serif">Business Hours</h3>
+                </div>
+                <p class="text-secondary small mb-0 ps-1">Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm<br>Sunday: Closed</p>
             </div>
             <div class="card-media p-4">
-                <h3 class="fw-bold text-white mb-3"><i class="bi bi-clock text-brand me-2"></i>Hours</h3>
-                <p class="text-secondary small mb-0">Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm<br>Sunday: Closed</p>
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <span class="hero-stat-icon" style="width:48px;height:48px;font-size:1.4rem"><i class="bi bi-telephone-fill"></i></span>
+                    <h3 class="fw-bold text-white mb-0" style="font-family:'Sora',sans-serif">Call Us</h3>
+                </div>
+                <p class="text-secondary small mb-0 ps-1">+91 98765 43210<br>+91 98765 43211</p>
+                <div class="d-flex gap-2 mt-3">
+                    <a href="#" class="nav-icon-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="nav-icon-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="nav-icon-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="nav-icon-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                </div>
             </div>
         </div>
     </div>

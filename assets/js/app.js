@@ -261,38 +261,79 @@ window.playSong = function (id, title, artist, img) {
   start();
 })();
 
-// ---- Generic carousel arrow controller ----
+// ---- Generic carousel controller: arrows + auto-animate slider ----
 // Works for any carousel with [data-carousel="name"] track + [data-carousel-prev] / [data-carousel-next]
 (function () {
   document.querySelectorAll('[data-carousel]').forEach(function (track) {
     var name = track.getAttribute('data-carousel');
     var prev = document.querySelector('[data-carousel-prev="' + name + '"]');
     var next = document.querySelector('[data-carousel-next="' + name + '"]');
+    var wrapper = track.closest('.lm-carousel-wrapper');
     var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '20') || 20;
+    var autoTimer = null;
+    var AUTO_INTERVAL = 3500;
+
     function step() {
       var card = track.children[0];
       if (!card) return 300;
       return card.offsetWidth + gap;
     }
-    function scrollBy(dir) {
-      track.scrollBy({ left: dir * step(), behavior: 'smooth' });
-    }
+    function maxScroll() { return track.scrollWidth - track.clientWidth; }
+    function scrollBy(dir) { track.scrollBy({ left: dir * step(), behavior: 'smooth' }); }
+
     function updateArrows() {
-      var maxScroll = track.scrollWidth - track.clientWidth - 4;
+      var ms = maxScroll() - 4;
       if (prev) {
         prev.style.opacity = track.scrollLeft <= 4 ? '0.35' : '1';
         prev.style.pointerEvents = track.scrollLeft <= 4 ? 'none' : 'auto';
       }
       if (next) {
-        next.style.opacity = track.scrollLeft >= maxScroll ? '0.35' : '1';
-        next.style.pointerEvents = track.scrollLeft >= maxScroll ? 'none' : 'auto';
+        next.style.opacity = track.scrollLeft >= ms ? '0.35' : '1';
+        next.style.pointerEvents = track.scrollLeft >= ms ? 'none' : 'auto';
       }
     }
-    if (prev) prev.addEventListener('click', function () { scrollBy(-1); });
-    if (next) next.addEventListener('click', function () { scrollBy(1); });
+
+    // ---- Auto-animate (infinite loop) ----
+    function autoNext() {
+      if (track.scrollLeft >= maxScroll() - 2) {
+        track.classList.add('paused');
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+        setTimeout(function () { track.classList.remove('paused'); }, 600);
+      } else {
+        scrollBy(1);
+      }
+    }
+    function startAuto() {
+      if (track.children.length < 2) return;
+      stopAuto();
+      autoTimer = setInterval(autoNext, AUTO_INTERVAL);
+    }
+    function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+    function resetAuto() { stopAuto(); startAuto(); }
+
+    if (prev) prev.addEventListener('click', function () { scrollBy(-1); resetAuto(); });
+    if (next) next.addEventListener('click', function () { scrollBy(1); resetAuto(); });
+
+    // Pause on hover/focus, resume on leave
+    if (wrapper) {
+      wrapper.addEventListener('mouseenter', stopAuto);
+      wrapper.addEventListener('mouseleave', startAuto);
+    }
     track.addEventListener('scroll', updateArrows, { passive: true });
     window.addEventListener('resize', updateArrows);
     updateArrows();
+
+    // Start auto only when the carousel scrolls into view
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) startAuto(); else stopAuto();
+        });
+      }, { threshold: 0.25 });
+      io.observe(track);
+    } else {
+      startAuto();
+    }
   });
 })();
 
