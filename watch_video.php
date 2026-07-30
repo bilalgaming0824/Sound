@@ -10,8 +10,19 @@ increment_video_views($id);
 if (is_logged_in()) add_history((int)$_SESSION['user_id'], 'video', $id);
 
 $related = get_videos(8, 'RAND()');
+
+$ytId = null;
+if ($video['video_url']) {
+    if (preg_match('#(?:youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([A-Za-z0-9_-]{11})#', $video['video_url'], $m)) {
+        $ytId = $m[1];
+    }
+}
+
 render_header('Watch: ' . $video['title'], 'videos');
 ?>
+<style>
+.yt-embed { width:100%; height:100%; border:0; }
+</style>
 
 <div class="container-fluid px-3 px-lg-4 py-3">
     <a href="<?= url('video_detail.php?id=' . $id) ?>" class="link-underline small text-secondary"><i class="bi bi-arrow-left"></i> Back to Video Details</a>
@@ -21,10 +32,12 @@ render_header('Watch: ' . $video['title'], 'videos');
     <div class="row g-4">
         <div class="col-lg-9">
             <div class="ratio ratio-16x9 rounded-4 overflow-hidden border border-ink" style="background:#000">
-                <?php if ($video['video_url']): ?>
+                <?php if ($ytId): ?>
+                    <iframe class="yt-embed" src="https://www.youtube.com/embed/<?= e($ytId) ?>?autoplay=1" title="<?= e($video['title']) ?>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <?php elseif ($video['video_url']): ?>
                     <video controls autoplay poster="<?= e(media_url($video['image_url'])) ?>" class="w-100 h-100" src="<?= e(media_url($video['video_url'])) ?>"></video>
                 <?php else: ?>
-                    <img src="<?= e($video['image_url']) ?>" alt="<?= e($video['title']) ?>" class="w-100 h-100" style="object-fit:contain">
+                    <img src="<?= e(media_url($video['image_url'])) ?>" alt="<?= e($video['title']) ?>" class="w-100 h-100" style="object-fit:contain">
                 <?php endif; ?>
             </div>
             <div class="mt-3">

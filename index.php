@@ -157,7 +157,7 @@ render_header('Home', 'home');
 
         <div class="lm-track" id="lmTrack" data-carousel="latest-music">
             <?php foreach ($latestSongs as $s):
-                $img = $s['image_url'] ?: 'https://images.pexels.com/photos/352505/pexels-photo-352505.jpeg?auto=compress&cs=tinysrgb&w=600';
+                $img = $s['image_url'] ?: 'public/images/song-1.webp';
                 $dur = $s['duration'] ?? '0:00';
                 $rawViews = intval($s['views'] ?? 0);
                 $views = $rawViews >= 1000 ? round($rawViews/1000, 1) . 'K' : $rawViews;
@@ -215,7 +215,7 @@ render_header('Home', 'home');
         <button class="lm-arrow lv-arrow-prev" data-carousel-prev="latest-videos" id="lvPrev" aria-label="Previous"><i class="bi bi-chevron-left"></i></button>
         <div class="lm-track" id="lvTrack" data-carousel="latest-videos">
             <?php foreach ($latestVideos as $v):
-                $img = $v['image_url'] ?: 'https://images.pexels.com/photos/38170212/pexels-photo-38170212.jpeg?auto=compress&cs=tinysrgb&w=600';
+                $img = $v['image_url'] ?: 'public/images/video-1.webp';
                 $dur = $v['duration'] ?? '0:00';
                 $rawViews = intval($v['views'] ?? 0);
                 $views = $rawViews >= 1000 ? round($rawViews/1000, 1) . 'K' : $rawViews;
@@ -268,7 +268,7 @@ render_header('Home', 'home');
             $trendingDisplay = array_slice($trendingSongs, 0, 12);
             $rankColors = ['#6c63ff','#0d9488','#2563eb','#10b981','#f97316','#ec4899','#8b5cf6','#06b6d4'];
             foreach ($trendingDisplay as $rank => $s):
-                $img = $s['image_url'] ?: 'https://images.pexels.com/photos/352505/pexels-photo-352505.jpeg?auto=compress&cs=tinysrgb&w=600';
+                $img = $s['image_url'] ?: 'public/images/song-1.webp';
                 $dur = $s['duration'] ?? '0:00';
                 $rawViews = intval($s['views'] ?? 0);
                 $views = $rawViews >= 1000 ? round($rawViews/1000, 1) . 'K' : $rawViews;
@@ -351,7 +351,7 @@ render_header('Home', 'home');
 
         <div class="fa-grid">
             <?php foreach ($albums as $al):
-                $img = $al['image_url'] ?: 'https://images.pexels.com/photos/3563172/pexels-photo-3563172.jpeg?auto=compress&cs=tinysrgb&w=600';
+                $img = $al['image_url'] ?: 'public/images/album-1.webp';
                 $songCount = (int)($al['song_count'] ?? 0);
                 $year = !empty($al['year']) ? e($al['year']) : (date('Y'));
             ?>
@@ -424,7 +424,7 @@ render_header('Home', 'home');
 
         <div class="fart-grid">
             <?php foreach ($artists as $a):
-                $img = $a['image_url'] ?: 'https://images.pexels.com/photos/3563172/pexels-photo-3563172.jpeg?auto=compress&cs=tinysrgb&w=400';
+                $img = $a['image_url'] ?: 'public/images/artist-arijit.webp';
                 $songCount = (int)($a['song_count'] ?? 0);
                 $listeners = max($songCount * 340, 1200);
                 $genreName = !empty($a['genre']) ? e($a['genre']) : 'Multi-genre';
@@ -503,12 +503,12 @@ render_header('Home', 'home');
         <div class="bc-grid">
             <?php
             $bcImgs = [
-                'https://images.pexels.com/photos/3755771/pexels-photo-3755771.png?auto=compress&cs=tinysrgb&w=500',
-                'https://images.pexels.com/photos/1201112/pexels-photo-1201112.jpeg?auto=compress&cs=tinysrgb&w=500',
-                'https://images.pexels.com/photos/3721941/pexels-photo-3721941.jpeg?auto=compress&cs=tinysrgb&w=500',
-                'https://images.pexels.com/photos/48592/pexels-photo-48592.jpeg?auto=compress&cs=tinysrgb&w=500',
-                'https://images.pexels.com/photos/1688259/pexels-photo-1688259.jpeg?auto=compress&cs=tinysrgb&w=500',
-                'https://images.pexels.com/photos/4482872/pexels-photo-4482872.jpeg?auto=compress&cs=tinysrgb&w=500',
+                'public/images/cat-1.webp',
+                'public/images/cat-2.webp',
+                'public/images/cat-3.webp',
+                'public/images/cat-4.webp',
+                'public/images/cat-5.webp',
+                'public/images/cat-6.webp',
             ];
             $bcIcons = ['bi-music-note-beamed', 'bi-globe-asia-australia', 'bi-people-fill', 'bi-fire', 'bi-heart-fill', 'bi-disc'];
             $bcGrads = [

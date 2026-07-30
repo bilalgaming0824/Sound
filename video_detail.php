@@ -33,7 +33,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_logged_in()) {
 
 $flash = get_flash();
 render_header($video['title'], 'videos');
+
+$ytId = null;
+if ($video['video_url']) {
+    if (preg_match('#(?:youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([A-Za-z0-9_-]{11})#', $video['video_url'], $m)) {
+        $ytId = $m[1];
+    }
+}
 ?>
+<style>
+.yt-embed { width:100%; height:100%; border:0; }
+</style>
 
 <div class="container-fluid px-3 px-lg-4 py-3">
     <a href="<?= url('videos.php') ?>" class="link-underline small text-secondary"><i class="bi bi-arrow-left"></i> Back to Videos</a>
@@ -43,10 +53,12 @@ render_header($video['title'], 'videos');
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="ratio ratio-16x9 rounded-4 overflow-hidden border border-ink" style="background:#000">
-                <?php if ($video['video_url']): ?>
+                <?php if ($ytId): ?>
+                    <iframe class="yt-embed" src="https://www.youtube.com/embed/<?= e($ytId) ?>" title="<?= e($video['title']) ?>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <?php elseif ($video['video_url']): ?>
                     <video controls poster="<?= e(media_url($video['image_url'])) ?>" class="w-100 h-100" src="<?= e(media_url($video['video_url'])) ?>"></video>
                 <?php else: ?>
-                    <img src="<?= e($video['image_url']) ?>" alt="<?= e($video['title']) ?>" class="w-100 h-100" style="object-fit:cover">
+                    <img src="<?= e(media_url($video['image_url'])) ?>" alt="<?= e($video['title']) ?>" class="w-100 h-100" style="object-fit:cover">
                 <?php endif; ?>
             </div>
             <div class="mt-3">
@@ -85,9 +97,6 @@ render_header($video['title'], 'videos');
                     <?php endif; ?>
                     <a href="<?= url('watch_video.php?id=' . $id) ?>" class="btn btn-ghost"><i class="bi bi-fullscreen"></i> Watch Fullscreen</a>
                     <button class="btn btn-ghost" onclick="copyShareLink()"><i class="bi bi-share"></i> Share</button>
-                    <?php if ($video['video_url']): ?>
-                    <a href="<?= e(media_url($video['video_url'])) ?>" download class="btn btn-ghost"><i class="bi bi-download"></i> Download</a>
-                    <?php endif; ?>
                 </div>
             </div>
 
@@ -146,7 +155,7 @@ render_header($video['title'], 'videos');
             <div class="d-flex flex-column gap-3">
             <?php foreach ($suggested as $v):
                 if ($v['id'] == $id) continue;
-                media_url($v['image_url']) ?>
+                $img = media_url($v['image_url']); ?>
                 <a href="<?= url('video_detail.php?id=' . $v['id']) ?>" class="mc-side-card d-flex text-decoration-none">
                     <div class="mc-side-thumb" style="width:140px;min-width:140px"><img src="<?= e($img) ?>" alt="" class="w-100 h-100" style="object-fit:cover;aspect-ratio:16/9"></div>
                     <div class="mc-side-info">

@@ -14,10 +14,7 @@ $cards = [
     ['label' => 'Reviews', 'value' => $stats['comments'], 'icon' => 'bi-chat-square-text', 'color' => 'rgba(245,158,11,0.15)', 'text' => 'text-warning'],
     ['label' => 'Ratings', 'value' => $stats['ratings'], 'icon' => 'bi-star', 'color' => 'rgba(249,115,22,0.15)', 'text' => 'text-orange'],
 ];
-$songsTrend = chart_songs_trend();
-$videosTrend = chart_videos_trend();
-$usersGrowth = chart_users_growth();
-$topGenres = chart_top_genres();
+// chart functions removed by user request
 ?>
 <!-- Stat Cards -->
 <div class="row g-3 mb-4">
@@ -29,40 +26,6 @@ $topGenres = chart_top_genres();
             </div>
         </div>
     <?php endforeach; ?>
-</div>
-
-<!-- Charts -->
-<div class="row g-3 mb-4">
-    <div class="col-lg-6">
-        <div class="card-media p-4">
-            <h3 class="fw-bold text-white mb-1">Songs Upload Trend</h3>
-            <p class="text-secondary small mb-3">New songs added per month</p>
-            <canvas id="songsChart" height="200"></canvas>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card-media p-4">
-            <h3 class="fw-bold text-white mb-1">Videos Upload Trend</h3>
-            <p class="text-secondary small mb-3">New videos added per month</p>
-            <canvas id="videosChart" height="200"></canvas>
-        </div>
-    </div>
-</div>
-<div class="row g-3 mb-4">
-    <div class="col-lg-8">
-        <div class="card-media p-4">
-            <h3 class="fw-bold text-white mb-1">Users Growth</h3>
-            <p class="text-secondary small mb-3">Cumulative registered users</p>
-            <canvas id="usersChart" height="200"></canvas>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="card-media p-4">
-            <h3 class="fw-bold text-white mb-1">Top Genres</h3>
-            <p class="text-secondary small mb-3">Songs per genre</p>
-            <canvas id="genresChart" height="200"></canvas>
-        </div>
-    </div>
 </div>
 
 <!-- Quick Actions + Recent -->
@@ -95,50 +58,4 @@ $topGenres = chart_top_genres();
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script>
-const songsTrend = <?= json_encode($songsTrend) ?>;
-const videosTrend = <?= json_encode($videosTrend) ?>;
-const usersGrowth = <?= json_encode($usersGrowth) ?>;
-const topGenres = <?= json_encode($topGenres) ?>;
-const chartColors = ['#6C63FF','#FF4D6D','#34D399','#F59E0B','#3B82F6','#EC4899'];
-Chart.defaults.color = '#9CA3AF';
-Chart.defaults.borderColor = 'rgba(255,255,255,0.08)';
-
-new Chart(document.getElementById('songsChart'), {
-    type: 'line',
-    data: {
-        labels: songsTrend.map(d => d.label),
-        datasets: [{ label: 'Songs', data: songsTrend.map(d => d.value), borderColor: '#6C63FF', backgroundColor: 'rgba(108,99,255,0.15)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#6C63FF' }]
-    },
-    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
-});
-
-new Chart(document.getElementById('videosChart'), {
-    type: 'bar',
-    data: {
-        labels: videosTrend.map(d => d.label),
-        datasets: [{ label: 'Videos', data: videosTrend.map(d => d.value), backgroundColor: '#FF4D6D', borderRadius: 8 }]
-    },
-    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
-});
-
-new Chart(document.getElementById('usersChart'), {
-    type: 'line',
-    data: {
-        labels: usersGrowth.map(d => d.label),
-        datasets: [{ label: 'Users', data: usersGrowth.map(d => d.value), borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.15)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#3B82F6' }]
-    },
-    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
-});
-
-new Chart(document.getElementById('genresChart'), {
-    type: 'doughnut',
-    data: {
-        labels: topGenres.map(d => d.label),
-        datasets: [{ data: topGenres.map(d => d.value), backgroundColor: chartColors, borderWidth: 0 }]
-    },
-    options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { padding: 12, font: { size: 11 } } } } }
-});
-</script>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
